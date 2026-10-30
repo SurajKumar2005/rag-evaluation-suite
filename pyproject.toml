@@ -1,0 +1,28 @@
+[project]
+name = "rag-evaluation"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "SurajKumar2005", email = "surajkumar2005guptasmrj@gmai.com" }
+]
+requires-python = ">=3.11"
+dependencies = [
+    "chromadb>=1.5.9",
+    "deepeval>=4.3.2",
+    "langchain-chroma>=1.1.0",
+    "langchain-core>=1.7.3",
+    "langchain-openai>=1.7.3",
+    "langchain-text-splitters>=1.1.3",
+    "openai>=3.41.0",
+    "pytest>=9.2.0",
+    "python-dotenv>=1.2.4",
+    "sentence-transformers>=6.2.0",
+]
+
+[project.scripts]
+rag-evaluation = "rag_evaluation:main"
+
+[build-system]
+requires = ["uv_build>=0.13.6,<0.14.0"]
+build-backend = "uv_build"

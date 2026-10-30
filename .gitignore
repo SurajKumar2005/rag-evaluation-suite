@@ -1,0 +1,49 @@
+
+# Python virtual environments
+.venv/
+venv/
+env/
+
+# Environment variables and API keys
+.env
+.env.*
+!.env.example
+
+# Python cache
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+
+# VS Code
+.vscode/
+
+# DeepEval local files
+.deepeval/
+
+# Raw course transcripts and datasets
+*.vtt
+data/raw/*
+data/processed/*
+data/evaluation/*
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Model files
+*.pkl
+*.joblib
+*.faiss
+*.index
+*.pt
+*.pth
+
+# Logs and temporary files
+*.log
+*.tmp
+temp/
+tmp/
+
+# Operating system
+.DS_Store
+Thumbs.db
