@@ -22,7 +22,6 @@ __pycache__/
 .deepeval/
 
 # Raw course transcripts and datasets
-*.vtt
 data/raw/*
 data/processed/*
 data/evaluation/*
