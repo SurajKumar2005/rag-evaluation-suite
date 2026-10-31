@@ -25,14 +25,21 @@ load_dotenv(PROJECT_ROOT / ".env", override=True)
 
 GOLDEN_PATH = PROJECT_ROOT / "goldens" / "retriever_goldens.json"
 REPORT_DIR = PROJECT_ROOT / "reports"
-REPORT_PATH = REPORT_DIR / "contextual_metrics_results.json"
+# REPORT_PATH = REPORT_DIR / "contextual_metrics_results.json"
+
+# Experiment A: Candidate K=15, Final K=4
+REPORT_PATH = REPORT_DIR / "experiment_B_k15_final3.json"
 
 THRESHOLD = 0.7
 
 EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
-CHUNK_SIZE = 750
-CHUNK_OVERLAP = 100
-TOP_K = 5
+RERANKER_MODEL = "cross-encoder/ms-marco-MiniLM-L-6-v2"
+
+CHUNK_SIZE = 1000
+CHUNK_OVERLAP = 150
+
+CANDIDATE_K = 15
+FINAL_K = 3
 
 # Small pause between metric requests.
 # This controls request frequency, not daily token consumption.
@@ -310,9 +317,11 @@ report = {
     "configuration": {
         "judge_model": None,
         "embedding_model": EMBEDDING_MODEL,
+        "reranker_model": RERANKER_MODEL,
         "chunk_size": CHUNK_SIZE,
         "chunk_overlap": CHUNK_OVERLAP,
-        "top_k": TOP_K,
+        "candidate_k": CANDIDATE_K,
+        "final_k": FINAL_K,
         "threshold": THRESHOLD,
         "execution_mode": "Sequential",
         "golden_dataset": str(GOLDEN_PATH),
