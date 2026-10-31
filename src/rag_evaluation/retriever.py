@@ -22,7 +22,7 @@ CHUNK_SIZE = 1000
 CHUNK_OVERLAP = 150
 
 CANDIDATE_K = 15
-FINAL_K = 5
+FINAL_K = 3
 
 RERANKER_MODEL = "cross-encoder/ms-marco-MiniLM-L-6-v2"
 
