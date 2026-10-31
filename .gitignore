@@ -46,3 +46,58 @@ tmp/
 # Operating system
 .DS_Store
 Thumbs.db
+# Python virtual environments
+.venv/
+venv/
+env/
+
+# Environment variables and API keys
+.env
+.env.*
+!.env.example
+
+# Python cache
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+
+# VS Code
+.vscode/
+
+# DeepEval local files
+.deepeval/
+
+# Raw course transcripts and datasets
+data/raw/*
+data/processed/*
+data/evaluation/*
+
+# Local vector databases
+chroma_store/
+chroma_store_hf/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Model files
+*.pkl
+*.joblib
+*.faiss
+*.index
+*.pt
+*.pth
+
+# Logs and temporary files
+*.log
+*.tmp
+temp/
+tmp/
+
+# Test coverage
+.coverage
+htmlcov/
+
+# Operating system
+.DS_Store
+Thumbs.db

@@ -1,0 +1,511 @@
+{
+    "project": "RAG Retrieval Evaluation",
+    "evaluation_date": "2026-10-31T02:19:01.759030+00:00",
+    "configuration": {
+        "judge_model": "qwen/qwen3.8-27b",
+        "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+        "chunk_size": 750,
+        "chunk_overlap": 100,
+        "top_k": 5,
+        "threshold": 0.7,
+        "execution_mode": "Sequential",
+        "golden_dataset": "D:\\rag-evaluation\\goldens\\retriever_goldens.json"
+    },
+    "total_test_cases": 15,
+    "evaluation_status": "COMPLETED",
+    "api_error": null,
+    "test_cases": [
+        {
+            "case_number": 1,
+            "input": "What is online eval and how is it different from offline eval?",
+            "expected_output": "Online eval is evaluating your system on live production traffic after deployment, as real users interact with it. Its biggest characteristic is that it works without an answer key or golden dataset—you have to estimate on the go what the right answer could be. It runs continuously after deployment on whatever questions real users ask, which you cannot anticipate in advance. The key distinction is that offline eval checks whether your application is working correctly, whereas online eval tells you whether your application is running normally in production. The two are not rivals or replacements—they are complementary and are meant to be used together.",
+            "retrieval_context": [
+                "eval is, That it is a different type of evaluation, Which we run on production, After our software is deployed. And the biggest characteristic of it is, That it works without an answer. It works without a golden data set. This is the biggest feature of online eval. And that is why it is super critical, Because it helps us, That our software, which is deployed, Keeps running properly. It tells us that, There is no problem with online. In that sense, online evals are super important. So, on the basis of the discussion till now, If I quickly lay out a difference, Between offline and online, There are 4-5 pointers. First of all, offline eval, Is before deployment, After online eval deployment. Talking about data, In offline eval, you have a",
+                "this point, Your application is working normally or not, Is this point clear? We will go into the lecture more, We will see how online eval works, What are the things different from offline eval, We will read all that in detail, But did you understand the purpose? Both have their own purpose, It's not like, You can use online in offline cases, No, they are different. I will give you an example of this, I will give you an example of this, The statement I said, Offline eval tells correctness, Online eval tells normalcy, I will give you an example of this, Remember our UPSC grader, Who checks the paper, Remember our UPSC grader, Can you tell me, When we were discussing in the last class, Offline evaluation of this system, When we were",
+                "if your application is working correctly or not, This line is very important, listen carefully, The work of offline eval is to check, If your application is working correctly or not, Whereas, the work of online eval is to tell, If your application is normally running or not, In production, These are the two main purposes, Offline eval will tell you, If your application is working correctly or not, Online will tell you, At this point, Your application is working correctly or not, This is the main purpose, So you have to check, If your application is working correctly or not, This is the main purpose, So you have to check, This will tell you, At this point, Your application is working normally or not, Is this point clear? We will go into the",
+                "and we performed the evaluation. Now, this evaluation is taking place after the creation of the software but before deployment. Which means that this is an example of an offline eval. In simple words, whenever you have an LLM based application and you want to test it before deploying it, whether it is worth deploying or not, then we call the evals that you run there as offline eval. As simple as that. So, everything that you have read till now, everything comes under offline eval. So, we didn't learn anything new. We gave a new name to what we had learned in the past. So, quickly tell me in the chat that if someone asks you tomorrow what offline evals are, would you be able to answer? Can you explain offline eval? Okay. Easy, right? Now,",
+                "be deployed, Which student will come and ask the question? And what is the correct answer to that question? You don't know that. So basically, if we can conclude, The conclusion would be that, After testing with offline eval, After deploying, There are many types of risks in production setup. And you cannot evaluate those risks, With the help of offline eval. We have given this statement till now. And that is why, who comes in the picture? Online eval. I can understand the work from the name. Online eval is evaluating your system, On live production traffic, After deployment, As real users interact with it. The simplest definition of online eval is, That it is a different type of evaluation, Which we run on production, After our software"
+            ],
+            "success": true,
+            "metrics": [
+                {
+                    "metric": "Contextual Recall",
+                    "score": 1.0,
+                    "threshold": 0.7,
+                    "status": "PASS",
+                    "reason": "The score is 1.00 because every sentence in the expected output is fully supported by the nodes in retrieval context. Specifically, nodes 1, 2, 3, and 5 collectively cover all the key points about online evaluation, its characteristics, and its relationship with offline evaluation. Great job achieving perfect recall!",
+                    "error": null
+                },
+                {
+                    "metric": "Contextual Precision",
+                    "score": 0.95,
+                    "threshold": 0.7,
+                    "status": "PASS",
+                    "reason": "The score is 0.95 because the retrieval contexts are highly relevant and well-ordered. The first three nodes are all directly relevant, providing the core definitions and distinctions between online and offline eval. The fourth node is irrelevant because it \"defines offline eval as taking place 'before deployment'\" and \"does not directly contribute to the definition of online eval or the specific comparison points highlighted in the expected output as strongly as the other documents.\" The re",
+                    "error": null
+                }
+            ]
+        },
+        {
+            "case_number": 2,
+            "input": "faithfulness vs groundedness kya hota hai?",
+            "expected_output": "Faithfulness, which is sometimes also called groundedness, means that the answer was generated on the basis of the given context—the relevant retrieved documents—and that no extra facts were invented beyond what the context contained. For example, if someone asks the duration of the machine learning course and the retrieved document says 3 weeks, the answer should state that the duration is 3 weeks and nothing more. It should not add unrelated extra information, like saying it's a great course or pitching the Python course. The answer must stay grounded in the context.",
+            "retrieval_context": [
+                "answer right or hallucination, which way did it go truthful QA then who went the way of depth we just read GPQA and who went to fix MMLU MMLU Pro right, this is the map so far now, simple QA where does it fit, I will tell you it fits here, when truthful QA was saturated, then this reliability question was in the picture, that the model that is answering is correct, it is okay to check its knowledge but it is so right it is truthful, that is also important so, truthful QA was replaced simple QA and the best thing about simple QA is that it is very simple, its name is also its work but even then it is a very difficult to crack benchmark for LLMs it is still active maybe this is the first benchmark which I am saying that it is still active it",
+                "This online evaluator will calculate and compute how much is the faithfulness score. So this is an example of a quantity or metric or signal that we have to calculate. You have to compute answer relevance, correctness, hallucination, toxicity, bias and fairness. You have to compute all these things. So is this point clear? First of all, see what kind of signals we are giving importance to in the production setup. There are two categories. One that we have to compute and the other that we simply capture and store. Okay? Just see this once. Everything is very simple and straightforward. This is all chatbot related. And these are your general quantities which are probably in normal software as well. LLM based software is not special. This is",
+                "there is a problem in understanding or in my teaching method. Ok, so I will take a small break. At this point, if you have any questions based on the discussion that we are having, tell me. Shiv is asking, but online Eval has no answer. How we actually estimate quality? There are many ways. You will understand it now. I will give an example. For example, the Rack chart is a chatbot. You can find many things in the Rack chart. You can see how faithfulness is. You don't need to know the right answer to check the faithfulness. Faithfulness means whether the answer has been generated from the context of the retrieval. You have the context and the answer. You can ask an LLM that the answer has been generated from the context. You can find out",
+                "it means that it will never do anything that is against human values it includes things like hallucination lying, cheating or giving you some information that you shouldn't give or talking to you in a tone that you shouldn't do all of this is part of alignment so the reliability of the answer that the answer is giving is correct confidently not lying, not wrong, this is also part of alignment so that is why Truthful QA raised this point so the answer of LLM is given as they have seen in training data but what they have seen in training data is misconceptions and the same misconceptions are being confidently propagated this is non alignment with human values so that was the main idea many angles were attacked on alignment this was one of",
+                "the answer that comes out should be correct. It should be helpful. Right. That's right. But apart from this, it is also important that the answer that comes out should be safe. It should not be that I am chatting with the chatbot and the chatbot tells me the phone number and email of another user. So, safety is also important. Apart from correctness, helpfulness, safety is also important at the application level. Similarly, you are talking about any workflow. Suppose you are talking about the workflow of the retriever generator that we have just discussed. Now what matters is that the answer that comes out is it faithful? Is it grounded? That is one aspect. But another aspect is that the answer that comes out should not cost much in"
+            ],
+            "success": false,
+            "metrics": [
+                {
+                    "metric": "Contextual Recall",
+                    "score": 1.0,
+                    "threshold": 0.7,
+                    "status": "PASS",
+                    "reason": "The score is 1.00 because every sentence in the expected output is fully supported by the nodes in retrieval context. Specifically, nodes 3 and 5 in retrieval context directly provide the definitions and grounding principles that underpin all the statements in the expected output, resulting in perfect contextual recall. Great job!",
+                    "error": null
+                },
+                {
+                    "metric": "Contextual Precision",
+                    "score": 0.3666666666666667,
+                    "threshold": 0.7,
+                    "status": "FAIL",
+                    "reason": "The score is 0.37 because the single most relevant node, which explicitly defines the concept by stating 'Faithfulness means whether the answer has been generated from the context of the retrieval,' is ranked third. It is preceded by two irrelevant nodes: the first node discusses 'truthful QA' and 'simple QA' benchmarks without defining the terms, and the second node mentions that 'faithfulness score' is a metric to be calculated but fails to provide a definition. The presence of these two无关",
+                    "error": null
+                }
+            ]
+        },
+        {
+            "case_number": 3,
+            "input": "how do i know if my eval is reference based or reference free?",
+            "expected_output": "The simplest way to tell is to ask one question: is the correct answer given in your golden dataset or not? If a correct answer is defined in advance for each test case, and you grade by comparing the output against that reference, then it is reference-based evaluation. If there is no correct answer in the data—for example, you only have a list of questions and you rely on human judgment and a rubric to score the output—then it is reference-free evaluation. So reference-based means the answer is known beforehand; reference-free means it isn't and you judge without a predefined answer.",
+            "retrieval_context": [
+                "data What the human is doing is It is reading this rubric And then on the basis of its judgment, it is deciding What should be the difference between 1 to 5? There is no correct answer defined here Here we are relying on human judgment and defining this rubric So this type of evaluation is called Reference free evaluation See here it is written In our case, there was a rubric Which I told you exactly So going forward, will you be able to classify If I show you an evaluation pipeline So will you be able to tell if it is reference free or reference based Simply you have to ask if the correct answer is given in your golden data set or not If it is not given, it is a reference free one If it is given, it is a reference based one Simple, this",
+                "is you have to set up an evaluator. You have to create an evaluator. Okay. Now this evaluator is a reference free evaluator. Does anyone remember from the last class what is the difference between reference based and reference free evaluations? Do you know? Do you remember? I told you. If you are performing an evaluation where you have an answer key in your golden data set, then what is that evaluation called? Reference based. The example of which was UPSC. If we are carrying out an evaluation where we don't have a golden data set and no answer key, then what do we call this kind of evaluation? Reference free evaluation. Right? So what we have to do now is we have to get the hallucination rate. That is, is our chatbot hallucinating or not?",
+                "and we performed the evaluation. Now, this evaluation is taking place after the creation of the software but before deployment. Which means that this is an example of an offline eval. In simple words, whenever you have an LLM based application and you want to test it before deploying it, whether it is worth deploying or not, then we call the evals that you run there as offline eval. As simple as that. So, everything that you have read till now, everything comes under offline eval. So, we didn't learn anything new. We gave a new name to what we had learned in the past. So, quickly tell me in the chat that if someone asks you tomorrow what offline evals are, would you be able to answer? Can you explain offline eval? Okay. Easy, right? Now,",
+                "Not model evaluation. Most likely 99% times. You have to read that. You can ask any question at this point. Okay. Fine. So, if we summarize the entire flow of this lecture, we first discussed why are we studying this topic. Then we discussed what LLM evals are and what are their types. We studied two types. Model evals and application evals. So why and what should be clear to you so far. Now we move towards how. How LLM evaluations are done. And here again there is a disclaimer. The how I will teach you, I will actually teach you from the perspective of application eval. I am not teaching from the perspective of model eval. Okay. Makes sense. Obviously because we are going to focus more on this. So come on. Now we will read a very",
+                "this point, Your application is working normally or not, Is this point clear? We will go into the lecture more, We will see how online eval works, What are the things different from offline eval, We will read all that in detail, But did you understand the purpose? Both have their own purpose, It's not like, You can use online in offline cases, No, they are different. I will give you an example of this, I will give you an example of this, The statement I said, Offline eval tells correctness, Online eval tells normalcy, I will give you an example of this, Remember our UPSC grader, Who checks the paper, Remember our UPSC grader, Can you tell me, When we were discussing in the last class, Offline evaluation of this system, When we were"
+            ],
+            "success": true,
+            "metrics": [
+                {
+                    "metric": "Contextual Recall",
+                    "score": 1.0,
+                    "threshold": 0.7,
+                    "status": "PASS",
+                    "reason": "The score is 1.00 because every sentence in the expected output is fully supported by the retrieval context. Specifically, nodes 1 and 2 in the retrieval context provide direct evidence for all the key claims, including the distinction between reference-based and reference-free evaluation, the role of a golden dataset, and the reliance on human judgment and rubrics. This is a perfect match!",
+                    "error": null
+                },
+                {
+                    "metric": "Contextual Precision",
+                    "score": 1.0,
+                    "threshold": 0.7,
+                    "status": "PASS",
+                    "reason": "The score is 1.00 because the top two retrieval nodes directly and accurately answer the question about distinguishing reference-based from reference-free evaluation, while the remaining nodes discuss unrelated topics like offline/online evals and model vs application evals. Perfect ranking!",
+                    "error": null
+                }
+            ]
+        },
+        {
+            "case_number": 4,
+            "input": "why can't we test llm apps the same way we test normal software?",
+            "expected_output": "Testing an LLM application is not as straightforward as testing normal software. Traditional software testing checks whether deterministic logic gives the expected output—the same input always produces the same fixed output. LLM application testing is different because the behaviour is probabilistic rather than deterministic, so instead of checking for one fixed correct output, you have to check whether the output meets a definition of 'good'. That is why LLM evaluation needs a different, more involved approach than traditional software testing.",
+            "retrieval_context": [
+                "LLM evaluations are very important? Are you convinced? Do you feel this is an important topic to study? You should study this. Okay. Okay. Is there any question at this point? Okay. Okay. So let's move ahead. And discuss once. What are the key differences in software testing and LLM evaluations. Okay. There are two major differences. I discuss both one by one. The first difference is. That the software. The software you create and use. By nature, it is deterministic. What is deterministic? That if you give the same input. Then every time you will get the same output. I guess you would agree. Let's say you made a calculator. Now in that calculator, you will give the input of 2 and 2. 2 plus 2. So the output will always be 4. Do this",
+                "to this is that evaluating LLM based applications is not straightforward. It's not like a software application. Which you quickly write some test cases and evaluate. Evaluating LLM based applications is very very tricky. And we will discuss that in the next section. What are the key complexities. Because of which it becomes difficult to evaluate LLM based applications. In comparison to a software system. So we will read that next. Before that, at this point, if you have any questions. Around what we discussed right now. So please let me know. Then we will move to the next topic. I will wait for 3-4 minutes. 3 minutes. Are you convinced that LLM evaluations are very important? Are you convinced? Do you feel this is an important topic to",
+                "user will ask what questions, what will he say. And how will your chatbot respond after turning it. You never know. And then there can be a lot of problems on the scale of a big company. So that is why one thing that you should take from the case studies of these three is that evaluation is super important. Without this, you cannot deploy your LLM based applications. One more question should come to your mind at this point. Because it came to my mind too. And that is that if the LLM application's evaluation is so important. Then why is this evaluation not so common? Why is there no other talk about it? Why don't people study? So the answer to this is that evaluating LLM based applications is not straightforward. It's not like a software",
+                "If you go to the last slide, it was written in the definition that LLM evals... LLM evals are systematic repeatable tests used to judge an LLM or LLM powered systems. Both are written here. And that is why we can say that there are two types of LLM evals. One is called model evals and the second is application evals. Model evals work is very simple. Given, evaluating LLM and application evals is to evaluate LLM based applications. And if this distinction is clear in your mind in the beginning, then it is very good. Here, in fact, I will give you a disclaimer. Disclaimer is that the terms written here, model eval and application eval, are not official terms. I have created these. Why have I created these? Because I want to simplify this",
+                "so whenever you talk about any type of model eval there are four things every model eval follows four steps first of all you decide what capabilities of LLM you want to test LLMs are general purpose models right, they can do a lot of things they have a lot of capabilities so there is no single model eval that can test every capability it's not like humans have IQ you can tell a lot about a human with a single number unfortunately LLMs don't have that every LLMs have a different model eval for every capability so the first thing that you have in model eval is that you decide what capability you want to test do you want to test its reasoning capability or its coding capability or do you want to see how safe it is to use or do you want to"
+            ],
+            "success": true,
+            "metrics": [
+                {
+                    "metric": "Contextual Recall",
+                    "score": 1.0,
+                    "threshold": 0.7,
+                    "status": "PASS",
+                    "reason": "The score is 1.00 because every sentence in the expected output is fully supported by the nodes in retrieval context. Node 1 provides the basis for the deterministic nature of traditional software, while node 2 supports the distinction that LLM evaluation is not straightforward and differs from standard software testing. Great job capturing all the key points!",
+                    "error": null
+                },
+                {
+                    "metric": "Contextual Precision",
+                    "score": 1.0,
+                    "threshold": 0.7,
+                    "status": "PASS",
+                    "reason": "The score is 1.00 because the top two retrieval nodes are highly relevant, directly addressing the deterministic nature of traditional software and the non-straightforward evaluation of LLM apps. The remaining nodes, which are less relevant, are correctly ranked lower.",
+                    "error": null
+                }
+            ]
+        },
+        {
+            "case_number": 5,
+            "input": "why can't we just compare the generated sql query with the correct one character by character?",
+            "expected_output": "Comparing the generated SQL query with the correct query character by character is not a good strategy, because a single result can be produced by multiple different queries. The query your data analyst wrote and the query the LLM generated to solve the same problem may be different textually, yet both are correct. So instead of matching the query strings, you run both queries on the database, get a result set—a table—from each, and compare the two tables. If both tables are the same, the generated query is considered correct.",
+            "retrieval_context": [
+                "this query If character by character is same Then the correct query is generated But is it a good strategy? Is it a good strategy? No, because for a single result Multiple queries can be written Achieving a single result Through multiple queries Is possible So it is possible that the query That your data analyst has written And to solve that problem The query that your LLM has generated Both are different At least Textually But how can you Check that you run both On the database And you will get A result set from both Basically a table This will be table 1 This will be table 2 And what you do You compare these two tables That are they both Same? If they are both same Then it means that Your generated query is correct This is how you check",
+                "the first one 5.6 Tera So what we did We picked up question 1 And sent it to 5.6 Tera What did Tera do? It generated A SQL Now what will we do? We will pick up this SQL And run it In our database And along with that What we will do is The first question in our golden database The SQL query The golden SQL query We will run it in the database There are two queries One from the data set And one from LLM We will run both of them Now think and tell us What will be the criteria? How would we check that the generated query Is correct? Can we Match the string? Tell us quickly Can we directly Compare this generated query Character by character With this query If character by character is same Then the correct query is generated But is it a good",
+                "And second Which data they have used To do this entire benchmarking I didn't know that In short I couldn't trust These text to SQL leader boards So I saw a fallback That instead of going specific To text to SQL leader boards Let's go to Coding leader boards Because SQL generating Is kind of a coding activity So We can extract From coding leader boards Information So in this class what I am going to do is That I am going to Use a coding leader board And coding Capability We will treat it like alias To generate SQL Basically How good is the Capability of SQL generating Of any model We will find out from this That how good is its coding capability I guess you can understand We are using coding capability as an alias So one leader board Which",
+                "Its SQL query Who will write this SQL query? Our data analyst And he will Write this query And run it On this database And validate it That yes, this SQL query Answers this question correctly Then we will Add more questions like this That Jaspreet Gumbra from 2012 To 2016 Which matches Did he play on which ground? We added this question here Our data analyst will come For this question Will write a SQL query And that SQL query Will run on the database And validate that yes, the query Which I have added here I have done it correctly And like this You will make a list of 50 questions Which we will call our golden data set Now while making this golden data set You have to be super careful That you keep this data set Very representative To the",
+                "We will provide our database schema So that you can understand what SQL query you want to write Given a database schema and a question Return a single SQL query that answers it Using SQLite syntax Because currently the database Which we are using in today's class Is SQLite You can use anything like oscray or mysql Return only the SQL query I don't need any other explanation From LLM You simply give me SQL query Now look here I have provided the schema here So apparently The current schema I have There are two tables in it One is matches By the way, we are operating in IPL domain Because there are many other things in cricket International T20 International test matches Women's and men's matches So we are narrowing the domain and focusing"
+            ],
+            "success": true,
+            "metrics": [
+                {
+                    "metric": "Contextual Recall",
+                    "score": 1.0,
+                    "threshold": 0.7,
+                    "status": "PASS",
+                    "reason": "The score is 1.00 because every sentence in the expected output is fully supported by node 1 in retrieval context, which covers the entire argument from why character-by-character comparison fails to the table-comparison approach for verifying query correctness. Great job!",
+                    "error": null
+                },
+                {
+                    "metric": "Contextual Precision",
+                    "score": 1.0,
+                    "threshold": 0.7,
+                    "status": "PASS",
+                    "reason": "The score is 1.00 because the two most relevant nodes are ranked at the top positions, directly addressing why character-by-character comparison fails and setting up the premise of the question. The irrelevant nodes discussing leaderboards, golden data sets, and prompt syntax are correctly ranked lower.",
+                    "error": null
+                }
+            ]
+        },
+        {
+            "case_number": 6,
+            "input": "if a model tops all the benchmarks, why wouldn't i just pick it for my project?",
+            "expected_output": "The model that tops the benchmarks isn't always the best choice for your specific task. In the Zomato email-routing example, model A was a big top-of-the-leaderboard model that beat the smaller, cheaper model B on every benchmark, so the obvious choice seemed to be model A. But when you build your own golden dataset for your actual task and run both models on it, the accuracy difference turns out to be small, while the smaller model is much cheaper and faster. So for that specific task the smaller, cheaper model is the better value, even though it is weaker overall. If you had relied only on benchmarks you would have chosen the bigger model—it is the custom eval on your own data that reveals the cheaper model is better for your work.",
+            "retrieval_context": [
+                "now tell me based on this table logically which model would you choose? would you go for model A which is a bigger powerful model or B? it is very very simple and very very straight forward that you will say that even though model A is very powerful and is very good in comparison with model B but for our task model B is a much better value proposition because we are not using too much accuracy but we are saving a lot of money and latency so we will go with model B now think about it if we would have depended on only benchmarks would we have reached this conclusion? quickly tell me if we had only the option of benchmarks if we would have done model evaluation only through benchmarks would we have reached the conclusion that model B is",
+                "famous benchmarks so it's not possible for me to teach you every benchmark in detail because every benchmark technically speaking is a research paper and research paper has details so if we go to cover all the benchmarks it would take a lot of time it might take 4-5 sessions and I don't want to give that much because we have to cover other things so initially I thought that rather than covering all the benchmarks what if I teach you 10 most popular benchmarks first of all I got this idea then I thought that if we go to cover only 10 most popular benchmarks then only the famous capabilities like coding is a very famous capability that will be covered more and the understated capabilities such as long context and all maybe that won't be",
+                "because you will work like AI engineers in the future and most of the times when you go to make an application then step one is model selection and in model selection also step one is to go to the leaderboards and see which model is at the top so we get the bias that if it is on the leaderboard then it will be right but it is not, you cannot blindly trust leaderboards what are the reasons we are discussing the first reason is that benchmark performance may not transfer to real applications this is very important if a model is hitting 80-90 it does not mean that it will give you the same results in your real application like the famous thing that if you solve the problem on Kaggle it does not mean that you will become a good data scientist",
+                "benchmark you make your own evaluation sets see here it is written this is a very important point understand this I also said an important point that model evals are of two types one is benchmarks which are basically standardized tests which test specific capabilities like the capability of maths or the capability of reasoning or the capability of instruction following and the second thing is that you sometimes run custom evaluations on your model because you have to know that how your given LLM will perform on your application now obviously you might have a question in your mind that if I am getting answers from the benchmark like how good is the math, reasoning, coding then why do I need to run my own custom evaluation I will answer this",
+                "benchmarks were originally a research paper which researchers brought researchers have this work they are actually studying how can we test any particular LLM's capability so researchers from their field bring benchmarks from their field and then those benchmarks get popular their data sets get popular and then they measure every new LLM which comes in the market so I was able to explain to you what is the whole foundation of benchmarks let me know some people were asking questions about LLM sorry what are benchmarks so is the answer clear now what all comes in it is it clear let me know see I have not intentionally thrown many benchmarks on you ideally I could have thrown many names of benchmarks on you I am not doing that I will do this"
+            ],
+            "success": true,
+            "metrics": [
+                {
+                    "metric": "Contextual Recall",
+                    "score": 0.8,
+                    "threshold": 0.7,
+                    "status": "PASS",
+                    "reason": "The score is 0.80 because most of the expected output is well-supported by the retrieval context. Node 1 in retrieval context supports the key points about model B being a better value proposition due to cost and latency savings, and nodes 1 and 4 support the idea that custom evaluations on your own data are necessary. However, the specific Zomato email-routing example and the detail that model A beat model B on every benchmark are not found in the retrieval context, which accounts for the 0",
+                    "error": null
+                },
+                {
+                    "metric": "Contextual Precision",
+                    "score": 0.8055555555555555,
+                    "threshold": 0.7,
+                    "status": "PASS",
+                    "reason": "The score is 0.81 because the retrieval contexts are mostly well-ranked, with the first node being highly relevant and the third and fourth nodes also providing strong support for the answer. However, the second node is irrelevant, discussing the difficulty of teaching benchmarks rather than why a top-performing model might not be the best choice, and the fifth node is also irrelevant, explaining the historical origin of benchmarks. These irrelevant nodes are ranked lower than the relevant 3",
+                    "error": null
+                }
+            ]
+        },
+        {
+            "case_number": 7,
+            "input": "what are the different ways an eval can actually be run?",
+            "expected_output": "An evaluation pipeline can be executed in one of three ways, and the distinction is simply about who is carrying out the eval. The first is programmatic, also called deterministic—a program or code executes the evaluation. The second is human—a human carries out the eval. The third is model-graded, also called LLM-graded—an LLM executes the evaluation. Any eval pipeline you build will be run by one of these three: a program, a human, or an LLM, and there's nothing beyond these three. For example, in the Zomato email-classification system, the accuracy was calculated through Python code, so that was a programmatic eval.",
+            "retrieval_context": [
+                "and tried to prove this point with an example. That's it. We didn't discuss anything more than this. Okay, fine. Okay, let's move ahead. Now, this is one reason for multiple evals and multiple failure points. There is one more reason and that reason is risk categories. Okay, now what happens is that you have three things on which you can put evals. Individual components, workflows and entire application. You can put evals on these three things. But what is possible is that there are variations in these three things. For example, suppose you made a Rack Chartboard. So, when a user is using that application, then obviously what matters is that the answer that comes out should be correct. It should be helpful. Right. That's right. But apart",
+                "and we performed the evaluation. Now, this evaluation is taking place after the creation of the software but before deployment. Which means that this is an example of an offline eval. In simple words, whenever you have an LLM based application and you want to test it before deploying it, whether it is worth deploying or not, then we call the evals that you run there as offline eval. As simple as that. So, everything that you have read till now, everything comes under offline eval. So, we didn't learn anything new. We gave a new name to what we had learned in the past. So, quickly tell me in the chat that if someone asks you tomorrow what offline evals are, would you be able to answer? Can you explain offline eval? Okay. Easy, right? Now,",
+                "Many people have come. Let's start the session. I am sharing the screen. Tell me if you can see my screen. Can you see my screen? You can see the one note screen. Can you see this black screen? This is our third and fourth session in this course. Let me give you a quick recap of what we have covered so far. Then I will tell you the agenda of today's session. Today's session is interesting. You will learn something new. By the end of the session, you will learn something good. So far, we have covered five things in the course LLMEvalse. First, we covered why do we need evals. Then we saw what exactly are evals. We studied model-based and application-based types. Then we studied how does LLMEvalse look like. Basically, we discussed an eval",
+                "not official terms. I have created these. Why have I created these? Because I want to simplify this topic in your mind. So, don't quote me that model eval is a term and application eval is a term. Even now, in the industry, both are called LLM evals. And then depending on the use case, people automatically understand that it is a model eval or an application eval. So, I am giving you this disclaimer from the beginning. Now, let's try to understand in detail what both types of evals do. First, let's talk about model evals. Here, a definition is written, model evals evaluate the model itself. It is simple. Their job is to evaluate LLMs. The main idea is to test and evaluate the capabilities of a model. The goal of these evals is that when a",
+                "evals are, would you be able to answer? Can you explain offline eval? Okay. Easy, right? Now, let's discuss an important aspect of offline eval. I want to hear from you. You tell me what is the main purpose of offline eval? If there is more than one purpose, then what is it? Type it once and tell me. What are the main purposes of an offline eval? Why do we need an offline eval? Why don't we make an LLM based software and deploy it directly? What is the problem? You have to tell me this. Actually, it's a very simple question. One very straightforward answer is that if we deploy it without testing, then how will the software behave in the production? We don't know. And anything can be risky. I had told you about two or three case studies in"
+            ],
+            "success": false,
+            "metrics": [
+                {
+                    "metric": "Contextual Recall",
+                    "score": 0.0,
+                    "threshold": 0.7,
+                    "status": "FAIL",
+                    "reason": "The score is 0.00 because none of the 5 nodes in retrieval context contain any information about the three ways to execute an evaluation pipeline (programmatic, human, or model-graded). The nodes discuss offline evals, model evals, and application evals, but do not address the distinction of who carries out the eval, nor do they mention the Zomato email-classification system example.",
+                    "error": null
+                },
+                {
+                    "metric": "Contextual Precision",
+                    "score": 0.0,
+                    "threshold": 0.7,
+                    "status": "FAIL",
+                    "reason": "The score is 0.00 because none of the five retrieved nodes are relevant to the input. The question asks about the different ways an eval can be run (e.g., programmatic, human, or model-graded), but every node discusses unrelated topics such as 'multiple evals and multiple failure points', 'offline eval' timing, course recaps, or types of evaluations like 'model evals' and 'application evals'. Since no relevant nodes were retrieved at all, the contextual precision is zero.",
+                    "error": null
+                }
+            ]
+        },
+        {
+            "case_number": 8,
+            "input": "can i just pick the top model from a leaderboard for my app?",
+            "expected_output": "No—you generally don't select a single model directly from a leaderboard. Leaderboards are best used as a filtering tool: when you don't have the resources to run evals on hundreds of models yourself, you go to the relevant leaderboard (say the maths leaderboard if your app is in the maths domain), pick your top candidates, and shortlist from the hundred down to about five. Then you run your own evals on those shortlisted candidates and select the best one for your application from there. So a leaderboard filters 100 models down to a handful of candidates; your own evaluation on your own task picks the final model.",
+            "retrieval_context": [
+                "you will read the frequently asked questions so you will be in a better position to judge that leaderboard and then on the basis of your criteria you will shortlist the top 3 to 5 models and when you have your 5 models then comes your 5th and most important step that you will run your own evaluation on it on those 5 models and those 5 models when your own evaluation set will run and the results that they will give, then you will get your top candidate so here one line that you have to remember this is the most important line that you have to take from this session that leaderboards are not a selection tool leaderboards are a filtering tool not a decision tool, meaning you don't go to leaderboard and decide that I will use this model to",
+                "can top the leaderboards but the actual performance will not be good after that, this is also an important thing especially for those leaderboards which combine multiple benchmarks and show you the results now the problem there is that which benchmarks are being included which are being excluded, that is on the leaderboard after that, how the scores are normalized suppose we are calculating an overall score of different capabilities so we are not being told how much weightage we are giving to every capability, so such things are hidden and they can sometimes bother you so whenever you are looking at a leaderboard the more transparency there is, the better the data about the leaderboard is after that, in a leaderboard small differences do",
+                "is, the better the data about the leaderboard is after that, in a leaderboard small differences do not matter like there are two models, one has a score of 84.3 and the other is 84.1 and this model came in 3rd position and this one went in 5th position but the difference was only of 0.2 so we don't understand that we should choose the 3rd one we will not choose the 5th one for our application but there is a good chance that both are very similar and 5th would be better for your application so sometimes we start focusing more on which rank the models are on so the rank bias is there that is not a good thing, if the difference is less then the models are of the same level so in rank 20, there will be no difference between rank 1 and rank 25",
+                "it is written here these rank models using the result of one particular benchmark either it is MMLU or HumanEval for coding or it is GSM8 for maths or it is GPQ so you will see all the models on a single benchmark and that ranking will be shown in the form of a leaderboard so the main idea is to tell which model performs best on this benchmark the only problem with this kind of leaderboard is that they give you a very narrow view how a model performs on a single benchmark you just get to know this, how is the overall model you don't get an idea about it, this is a very good example I have shown you this just one second this is a zoom issue I have shown you this this is HLE's website Humanities last exam this is its leaderboard Gemini 3 pro",
+                "called human preference based leaderboards in this you don't make a rank based on a benchmark what you do is you make a comparison so your user comes to your website you ask him a question same question is asked by two models A and B both the answers are there now you ask the user whether you liked A or B so basically you are scoring yourself on the basis of helpfulness, clarity, writing quality, creativity and the way of giving the answer and when a lot of these types of votes are collected then a ranking is made on the basis of that and that ranking is shown in this leaderboard here it is written these rank models using human votes we took a response from two models, asked the user to select which one and after a lot of votes this"
+            ],
+            "success": true,
+            "metrics": [
+                {
+                    "metric": "Contextual Recall",
+                    "score": 1.0,
+                    "threshold": 0.7,
+                    "status": "PASS",
+                    "reason": "The score is 1.00 because every sentence in the expected output is fully supported by the 1st node in retrieval context, which covers the filtering role of leaderboards, shortlisting to a few candidates, and running your own evals to pick the final model. Great job!",
+                    "error": null
+                },
+                {
+                    "metric": "Contextual Precision",
+                    "score": 1.0,
+                    "threshold": 0.7,
+                    "status": "PASS",
+                    "reason": "The score is 1.00 because all the most relevant nodes are ranked at the top, perfectly addressing the input. The first four nodes are highly relevant, covering key points like 'leaderboards are not a selection tool' and 'rank bias'. The only irrelevant node, which describes 'human preference based leaderboards', is correctly ranked last, ensuring the most useful information is prioritized.",
+                    "error": null
+                }
+            ]
+        },
+        {
+            "case_number": 9,
+            "input": "where can a rag chatbot go wrong?",
+            "expected_output": "A RAG chatbot has two main failure points, corresponding to its two components: the retriever and the generator. The first failure is when the retriever fetches the wrong documents—if it brings back wrong documents, the generator will produce wrong answers based on that wrong context. The second failure is when the retriever works properly but the generator ignores the retrieved context, hallucinates, and gives a wrong answer anyway. Both components need to work properly for the overall application to work.",
+            "retrieval_context": [
+                "simple chatbot. It could be a basic RAD chatbot. Or it could be an agent. It could be a multi-agent software. Anything. If you have made it, then write it in the chat. A lot of you know how to build LLME-based applications. But if I ask the next question, have you ever evaluated it properly? Have you ever made an application or a chatbot? Have you ever evaluated it methodologically? So what would you say? I feel a lot of you will say that sir, I haven't evaluated it properly. But I asked him questions and I found the answer to it. So I assumed that this application is working properly. Right? Mostly we do this. What we do is we build an LLME-based application. Then before checking it, before launching it, before sharing it with someone, we",
+                "fail. If you have written system prompt, then system prompt can make a mistake. In rag application, retriever, reranker, query rewriter, embedding model, vector database, if you are making a structured output based application, then your output parser, agent, tool selector, memory, guardrails, any of these individual components can fail. So, you will have to run eval on them. Everyone will have their own eval pipeline. After that, if everything is going well on the component level, then also there can be a problem on the workflow level. As I showed you a while ago, there can be a problem in rag workflow. If you are building an agent, then there can be a problem on the workflow level of the agent. If you are building a multi-turn chatbot,",
+                "There should not be any such things in it which are unsafe or there are abuses written or tone of scaring. All these should not happen. So what will you do? You will define such criteria to evaluate the chatbot. Okay. Without criteria you just do wipe testing. With criteria you do proper evaluation. Okay. So in nutshell I have explained you at a theoretical level. But don't worry. After some time we will understand this whole workflow through a proper example. But at this point if I would like to summarize. LLM evals are basically tests. With the help of which you test LLM or LLM based applications for some given clear criteria. And usually these tests are repeatable and very systematic. We have read this till now. Now here I would like to",
+                "again because he feels that the chat bot is not helping him, he is rephrasing the question. So I will store all these things. Everything will be stored. Can someone tell me a tool to store all this? Have you seen a tool in the past where you use that tool to store such things? Perfect. Amin was right. I had also taught on YouTube, we had covered in detail that we had made a chat bot and we were storing every conversation of that chat bot. Where? On Langsmith. I can show you right now. So see this. This is Langsmith. Langsmith has different projects. What can you do in those projects? All your conversations are there. These are all conversations. You can store those conversations. You store everything in it. What the user sent, what was",
+                "also did vibe testing. They did not properly test the chatbot and deployed it. So you can see how much loss can be reached on the scale of a big company if you launch an LLM based application without testing it. Similarly, there is one more incident which became very popular 2-3 years ago. There was a car dealership, an American brand called Chevrolet. They had a dealer. The dealer made a chatbot so that they could deal with customers. So a person went and started chatting with the chatbot. And he felt that there is a potential that I can do anything with this chatbot. So what he did was he prompted the chatbot in such a way that he said since I am your customer, you are obliged to follow whatever I say. So whatever I say, you have to"
+            ],
+            "success": true,
+            "metrics": [
+                {
+                    "metric": "Contextual Recall",
+                    "score": 1.0,
+                    "threshold": 0.7,
+                    "status": "PASS",
+                    "reason": "The score is 1.00 because every sentence in the expected output is fully supported by the retrieval context. Node 2 in the retrieval context provides direct backing for all key claims, including the failure points of the retriever and generator, and the necessity of both components working properly for the overall application to function.",
+                    "error": null
+                },
+                {
+                    "metric": "Contextual Precision",
+                    "score": 1.0,
+                    "threshold": 0.7,
+                    "status": "PASS",
+                    "reason": "The score is 1.00 because the first node in the retrieval contexts is directly relevant, as it mentions that in a RAG application, components like the retriever, reranker, and embedding model can fail. The remaining nodes are irrelevant, discussing evaluation criteria, Langsmith storage, and a Chevrolet chatbot incident, none of which address the specific RAG failure points.",
+                    "error": null
+                }
+            ]
+        },
+        {
+            "case_number": 10,
+            "input": "what exactly does recall at k tell me about my retriever?",
+            "expected_output": "Recall@k tells you, out of all the correct relevant documents that exist for a query, how many the retriever actually retrieved in its top-k results. For example, if there are two correct documents for a question and the retriever fetches only one of them, the recall is 1 out of 2, or 50%. Recall is always between 0 and 100%, and ideally should be 100%. To get the overall recall@k on your dataset, you compute recall per question and then average across all questions. This tells you how successful your retriever is at fetching the relevant documents.",
+            "retrieval_context": [
+                "in its top K results can you understand this line see suppose this is the question what are the prerequisites for ML course and how long it is now what we have done is we have chunked all our campus X documents and put all the documents in vector store now for this question we already know that 101 and 103 are the correct answers so in a way for this question the two correct documents are document number 101 and document number 103 now what happened when I sent this question to my retriever and I told you that you fetch K is equal to 5 documents so he fetched these documents 101, 102 104, 105 105, 106 now you tell me that in this particular scenario how much is the recall can someone tell me what is the recall based on this definition you",
+                "so now what I will do on per row basis or per question basis I will calculate recall for the first question if you see my retriever found 101 so total was 101 and we found 101 so in this case our recall is 100% 1 second one if you see 101 and 103 he also found 101 and couldn't find 103 so in this case it is 0.5 and we will calculate for every question and in the end we will average this whole quantity and by averaging we will get our recall at the rate k on our whole data set on our whole data set ok now this quantity is telling us how successful our retriever is in fetching relevant documents so you understood this whole thing basically what we did we defined the evaluation method we wrote a program to do this whole work and we ran",
+                "is very simple here we programmatically will determine how much is our recall very simple what we will do we will pick up 50 questions and send it to our retriever ok only to retriever not to retriever so what we did we picked up this first question and sent it to retriever and retriever's K is 5 ok so what retriever did for this first question for Q1 he took out these 5 documents ok, then we sent the second question then for the second question he took out these 5 documents same for third, fourth and fifth so for every question we retrieved the documents now see I have original correct answer and I also have retriever which documents he took so now what I will do on per row basis or per question basis I will calculate recall for the first",
+                "judge it that you can retrieve its recall at K which I have calculated and shown you besides this there are other things there is precision you can also retrieve rank but for now let's keep it simple what is our success criteria recall at the rate K ok so did you understand the discussion what are we doing we are evaluating our retriever and to evaluate what is the success criteria that we have defined that we will calculate its recall after that what was the next thing that we have to make a data set so we made that which you can see on the screen this is the data set what we did in this data set that we 50, 100 100 such questions which users can ask in the future when our chatbot will be live on the website so here we tried to cover all",
+                "this flow so obviously first of all our work is to define a task and target our task is that our retriever should work properly and our target is a single component which is retriever next we have to define a success criteria that how will we know that our retriever is working properly so guys already seen on screen but someone can tell that how can we quantify that a retriever is working properly working properly with a retriever so I told you how do we quantify it let me tell you the answer is this metric written here recall at K here a definition is written let's read it out of all the correct items that exist how many did the system retrieve in its top K results can you understand this line see suppose this is the question what are the"
+            ],
+            "success": true,
+            "metrics": [
+                {
+                    "metric": "Contextual Recall",
+                    "score": 1.0,
+                    "threshold": 0.7,
+                    "status": "PASS",
+                    "reason": "The score is 1.00 because every sentence in the expected output is fully supported by the retrieval context. Node 5 in retrieval context supports the definition of Recall@k, node 1 provides the concrete example of 50% recall, node 2 covers the range, the averaging process, and the interpretation of the metric, and node 5 reinforces the definition. This is a perfect match!",
+                    "error": null
+                },
+                {
+                    "metric": "Contextual Precision",
+                    "score": 0.8666666666666667,
+                    "threshold": 0.7,
+                    "status": "PASS",
+                    "reason": "The score is 0.87 because the retrieval contexts are highly relevant, with the core definition appearing at rank 5 and other key explanations at ranks 1 and 2. However, the score is not higher because two irrelevant nodes are ranked above the most critical definition node. Specifically, the third node, which only describes the 'setup of the evaluation process', and the fourth node, which merely mentions 'recall at K' as a success criteria, are ranked higher than the fifth node that provides ",
+                    "error": null
+                }
+            ]
+        },
+        {
+            "case_number": 11,
+            "input": "What is the RAG triad?",
+            "expected_output": "The RAG triad is a set of three metrics used to evaluate a RAG pipeline, based on the three things present after a query runs: the question, the retrieved context, and the generated answer. Context relevance checks whether the retrieved context is relevant to the question, faithfulness checks whether the answer is grounded in the retrieved context, and answer relevance checks whether the answer actually addresses the question.",
+            "retrieval_context": [
+                "when anyone wants to understand rag evaluation then he will understand by seeing these 4 lectures that is the whole idea so yeah we are ending this lecture on a promise that the next 4 lectures will be very interesting so that is all for today small session let me know what are your thoughts you will answer this question guys this one, I think you will answer it now I actually started speaking so I didn't pay attention do you feel you can answer better than your competition you are in a better place to answer this question ok so we will see this practically there can be some plus or minus which I have planned because I have not done it practically so there will be some improvisations but largely the framework we have discussed we will",
+                "exist like here if you go to rag then you will see answer relevancy, faithfulness contextual precision recall contextual relevancy all these things already exist then if you go to safety then toxicity PII leakage all these things already exist so instead of writing custom code to evaluate our rag application we will instead use this great library called deep eval which is the state of the art library most of the big companies use this library to do LLM based evaluations and the best part about this library is that it is based on the main library of python for software testing so if you have ever done software testing using PITest then this library will make you feel at home so we are going to use this library we are not going to use ragas",
+                "this is the entire premise Of this class Let me know if you have understood this far Is the problem statement clear What are we going to discuss going forward Is this clear We are going to build In technical terms We are going to build A text to SQL application But our goal in this class Is to select One test model Which will be the brain of this system This is the goal of our class today So let me know At this point So let me know at this point If you have any questions Then we will start our work We will start our analysis Let me know Let me open the chat So we assume that We have rag data pipeline In place This is not exactly Rag Because Here we are not Giving any external Documents to the model On the basis of which we have to answer",
+                "testing a rag application we will practically carry out this is our road map of the four sessions I am not starting today because this whole thing is around two hours and I want to do this in two hours in one stretch I don't want to make you read one hour today and then one hour on Saturday the flow breaks down so I have kept today's class specifically to have this entire discussion by the way I think on the basis of today's session you can kind of tackle this question don't you think? do you think if someone asks you this question now how do you evaluate your rag chatbot will you be able to answer this question? think about it, it's very simple what you have to say is first I will build an evaluation suite that person will ask what is an",
+                "relevance here basically it is told that given a question the answer generated is relevant for the question or not so we in isolation test these three metrics of our rag pipeline if these three metrics are working properly it means that your rag pipeline is working properly and if these three metrics are done then our particular level will be done so so far the flow is clear to everyone, what we are doing we are not doing that we have made our rag chart board first and then we are evaluating it no, this is not how it works your building the chart board and evaluating it it works together, it is just like software software we don't do that that you make the whole application and then test it, no, you test it at the feature level and"
+            ],
+            "success": true,
+            "metrics": [
+                {
+                    "metric": "Contextual Recall",
+                    "score": 1.0,
+                    "threshold": 0.7,
+                    "status": "PASS",
+                    "reason": "The score is 1.00 because all sentences in the expected output are fully supported by the retrieval context. Node 2 in retrieval context provides the specific metric names (answer relevancy, faithfulness, contextual relevancy), and node 4 in retrieval context confirms the three-metric framework based on question, context, and answer. Great job achieving perfect recall!",
+                    "error": null
+                },
+                {
+                    "metric": "Contextual Precision",
+                    "score": 0.7555555555555555,
+                    "threshold": 0.7,
+                    "status": "PASS",
+                    "reason": "The score is 0.76 because the relevant nodes are ranked at positions 1, 3, and 5, while irrelevant nodes are ranked at positions 2 and 4. The first node is highly relevant as it mentions \"answer relevancy, faithfulness contextual precision recall contextual relevancy\" which are the specific metrics of the RAG triad. However, the second node is irrelevant because it discusses \"building a 'text to SQL application'\" which is unrelated to the RAG triad. The third node is relevant as it states \"\"",
+                    "error": null
+                }
+            ]
+        },
+        {
+            "case_number": 12,
+            "input": "What is regression testing in LLM evaluation?",
+            "expected_output": "Regression testing is the act of running your full eval suite on a new version of the application to check whether it is objectively better or worse than the previous version. You run the suite, get a report of every metric, and compare it against a baseline to decide whether the new version should be deployed.",
+            "retrieval_context": [
+                "basically the act of running your eval suite on your application till now what we are doing we are building our eval suite we are writing different evaluation codes for different different components and pipelines and applications once everything is done then when you run it on the whole application we call this regression testing the simple foundation of regression testing is that if your version one of the software is running now you have made version two of the same software so how do you know version two is objectively not worse than version one is my application worse how do I test if it is not better than version one this is the answer you get in regression testing so there is nothing special in regression testing basically the eval",
+                "we have prepared to evaluate comes in LLM eval. When are we running these tests? Are we running it offline or after being deployed in production? That is also a part of this setup. After that, what tools are we using? Let's say we are using ragas because it is a rag application. So this tool is also a part of your LLM eval. So in a nutshell, if I simplify this discussion. Then just understand that whenever someone tells you what LLM evals are. Then you have to say that LLM eval means not just metrics. LLM evals means the entire testing setup. What are we testing? What basis are we testing? When are we testing? What tool are we using to test? We call all these LLM evals. Is this point clear? It might be a little confusing. But is this point",
+                "evals see here I have written it down the first test is called benchmark maybe you have heard its name there are very famous benchmarks what are the benchmarks? benchmarks are basically standardized shared tests so if there is a test like MMLU or SWI bench because everyone runs the same test it is great for comparing models on common ground so benchmark is a type of test benchmark is like a standardized test it is basically the same for all the models and you can openly compare the numbers of the two models it is like a standardized thing everyone recognizes it and everyone uses it and the second thing is that rather than testing an LLM on the benchmark you make your own evaluation sets see here it is written this is a very important point",
+                "so whenever you talk about any type of model eval there are four things every model eval follows four steps first of all you decide what capabilities of LLM you want to test LLMs are general purpose models right, they can do a lot of things they have a lot of capabilities so there is no single model eval that can test every capability it's not like humans have IQ you can tell a lot about a human with a single number unfortunately LLMs don't have that every LLMs have a different model eval for every capability so the first thing that you have in model eval is that you decide what capability you want to test do you want to test its reasoning capability or its coding capability or do you want to see how safe it is to use or do you want to",
+                "We call all these LLM evals. Is this point clear? It might be a little confusing. But is this point clear? That LLM evals is not only metric. It is basically the entire testing setup. Okay. And the goal of LLM eval is not to give you a score. Its goal is to give you the answer to practical questions. What kind of questions? See, it is written here. Can the model be used for a particular task application? You will get the answer to this question when you evaluate LLMs. Is this system good enough to ship? Are we producing it? Is it good enough to ship? Is this system good enough to ship? Can we put it into production? You will get the answer to this question when you evaluate LLMs. Did prompt version 2 improve over prompt V1? You can get the"
+            ],
+            "success": true,
+            "metrics": [
+                {
+                    "metric": "Contextual Recall",
+                    "score": 1.0,
+                    "threshold": 0.7,
+                    "status": "PASS",
+                    "reason": "The score is 1.00 because the expected output is fully supported by the retrieval context. Node 1 in retrieval context directly supports the definition of regression testing (sentences 1-2) and the comparison against a baseline (sentence 3), while node 5 in retrieval context supports the deployment decision aspect (sentence 4). Great job!",
+                    "error": null
+                },
+                {
+                    "metric": "Contextual Precision",
+                    "score": 1.0,
+                    "threshold": 0.7,
+                    "status": "PASS",
+                    "reason": "The score is 1.00 because the most relevant node, which directly defines regression testing as 'the act of running your eval suite on your application', is ranked first, perfectly prioritizing the key information over the irrelevant nodes that follow.",
+                    "error": null
+                }
+            ]
+        },
+        {
+            "case_number": 13,
+            "input": "Why does this course use DeepEval instead of RAGAS?",
+            "expected_output": "The course uses DeepEval for two reasons: RAGAS was already covered in the advanced RAG course, and DeepEval has a broader scope that supports agents, multi-turn chatbots, and non-LLM applications. DeepEval is also built on top of pytest, the standard Python testing library, which makes it familiar to anyone who has done software testing.",
+            "retrieval_context": [
+                "will make you feel at home so we are going to use this library we are not going to use ragas because you can use both you can do all this in ragas and deep eval I am selecting deep eval particularly because of two reasons first is ragas we have already studied in the advanced rag course second deep eval is a broader library its scope is even more like agents where you can see here agents, multi turn chat bots non LLM applications image based applications for all kinds of things you can use deep eval so that is why its adoption is also more and there is a good chance that after a year or two this NLM evaluations will become a benchmark library it will become the standard so its a good strategy that we are focusing more on deep eval I really",
+                "when anyone wants to understand rag evaluation then he will understand by seeing these 4 lectures that is the whole idea so yeah we are ending this lecture on a promise that the next 4 lectures will be very interesting so that is all for today small session let me know what are your thoughts you will answer this question guys this one, I think you will answer it now I actually started speaking so I didn't pay attention do you feel you can answer better than your competition you are in a better place to answer this question ok so we will see this practically there can be some plus or minus which I have planned because I have not done it practically so there will be some improvisations but largely the framework we have discussed we will",
+                "it will become the standard so its a good strategy that we are focusing more on deep eval I really hope you don't have any problem with this yeah ragas is good obviously there is no problem with this as I have already told you two reasons we have already covered this and second deep eval is a better library in comparison to ragas so yeah any other question is point pin move forward okay okay okay now a very important discussion once you make such a eval suite which we have also made after that comes a very important task which we call regression testing after that we do regression testing what is regression testing? regression testing is basically the act of running your eval suite on your application till now what we are doing we are",
+                "this so till now whatever discussion we had in this entire playlist, in this entire course was that how to evaluate LLM based applications we were talking about how to evaluate retriever in a rag application how to evaluate generator how to evaluate the entire pipeline how to evaluate the entire application but remember that in this entire discussion we never discussed that how to use LLM to run this rag application which will be the brain of this application how to evaluate it, how to select it think about it suppose you are thinking of making a rag application for your company so obviously the first question will be which LLM will you use will you use OpenAI LLM or will you use Claude LLM it is a simple question, think about it you have",
+                "But still there are very few people who are focusing on LLM evals which is actually quite important from the point of view of industry. One of the main reasons for this is that there is not much awareness about LLM evals and there are not that many resources on the internet. But over time people would realize that it is a very important topic and everyone should read it. So if you read this topic in advance then there is a better chance that you can perform better in the interview in comparison to your competitors. I had said this in the YouTube video that when I ask any person what questions were asked in your GenAI interview, then I always get to hear one question that how will you evaluate a rag application? How will you evaluate an"
+            ],
+            "success": false,
+            "metrics": [
+                {
+                    "metric": "Contextual Recall",
+                    "score": 0.5,
+                    "threshold": 0.7,
+                    "status": "FAIL",
+                    "reason": "The score is 0.50 because the first sentence of the expected output is well-supported by node 1 in retrieval context, which explicitly mentions the two reasons for selecting DeepEval (RAGAS already covered and broader scope). However, the second sentence about DeepEval being built on top of pytest and being the standard Python testing library is not found in any of the provided nodes, resulting in only partial recall.",
+                    "error": null
+                },
+                {
+                    "metric": "Contextual Precision",
+                    "score": 0.8333333333333333,
+                    "threshold": 0.7,
+                    "status": "PASS",
+                    "reason": "The score is 0.83 because the two relevant nodes (ranked 1st and 3rd) are well-positioned, with the top-ranked node directly providing the key reasons for choosing DeepEval over RAGAS. However, the score is not higher because irrelevant nodes are interspersed between the relevant ones—specifically, the 2nd node discusses 'the structure of the course and promises for the next lectures' and the 4th node covers 'the evaluation of LLMs in RAG applications,' which dilutes the precision by ranking",
+                    "error": null
+                }
+            ]
+        },
+        {
+            "case_number": 14,
+            "input": "What is an eval suite?",
+            "expected_output": "An eval suite is the combined set of all the evaluation tests written across the component, pipeline, and application levels. Instead of running a single test, you run the whole suite together to check the application from every angle before deciding whether to deploy.",
+            "retrieval_context": [
+                "Many people have come. Let's start the session. I am sharing the screen. Tell me if you can see my screen. Can you see my screen? You can see the one note screen. Can you see this black screen? This is our third and fourth session in this course. Let me give you a quick recap of what we have covered so far. Then I will tell you the agenda of today's session. Today's session is interesting. You will learn something new. By the end of the session, you will learn something good. So far, we have covered five things in the course LLMEvalse. First, we covered why do we need evals. Then we saw what exactly are evals. We studied model-based and application-based types. Then we studied how does LLMEvalse look like. Basically, we discussed an eval",
+                "not official terms. I have created these. Why have I created these? Because I want to simplify this topic in your mind. So, don't quote me that model eval is a term and application eval is a term. Even now, in the industry, both are called LLM evals. And then depending on the use case, people automatically understand that it is a model eval or an application eval. So, I am giving you this disclaimer from the beginning. Now, let's try to understand in detail what both types of evals do. First, let's talk about model evals. Here, a definition is written, model evals evaluate the model itself. It is simple. Their job is to evaluate LLMs. The main idea is to test and evaluate the capabilities of a model. The goal of these evals is that when a",
+                "and we performed the evaluation. Now, this evaluation is taking place after the creation of the software but before deployment. Which means that this is an example of an offline eval. In simple words, whenever you have an LLM based application and you want to test it before deploying it, whether it is worth deploying or not, then we call the evals that you run there as offline eval. As simple as that. So, everything that you have read till now, everything comes under offline eval. So, we didn't learn anything new. We gave a new name to what we had learned in the past. So, quickly tell me in the chat that if someone asks you tomorrow what offline evals are, would you be able to answer? Can you explain offline eval? Okay. Easy, right? Now,",
+                "but I thought since it is related so I will teach you once so is this point clear which I also said even if let's say if you don't know all this you have not studied in ML Ops in that case no problem you can ignore it then also you will understand things I have taught a little extra so on the basis of discussion so far our whole eval strategy is that we are building an eval suite on three levels and with the help of that eval suite we are doing regression testing now in regression testing we have discussed three levels first level simple regression testing where we are running the software once and bringing baseline numbers then every time running and bringing the next number and comparing manually with that we are understanding that our",
+                "evals are, would you be able to answer? Can you explain offline eval? Okay. Easy, right? Now, let's discuss an important aspect of offline eval. I want to hear from you. You tell me what is the main purpose of offline eval? If there is more than one purpose, then what is it? Type it once and tell me. What are the main purposes of an offline eval? Why do we need an offline eval? Why don't we make an LLM based software and deploy it directly? What is the problem? You have to tell me this. Actually, it's a very simple question. One very straightforward answer is that if we deploy it without testing, then how will the software behave in the production? We don't know. And anything can be risky. I had told you about two or three case studies in"
+            ],
+            "success": false,
+            "metrics": [
+                {
+                    "metric": "Contextual Recall",
+                    "score": 1.0,
+                    "threshold": 0.7,
+                    "status": "PASS",
+                    "reason": "The score is 1.00 because all sentences in the expected output are fully supported by the retrieval context. Node 4 in retrieval context supports the concept of an eval suite being a combined set across multiple levels, and node 3 in retrieval context supports the idea of running the whole suite to check the application before deciding whether to deploy. Great job, everything checks out perfectly!",
+                    "error": null
+                },
+                {
+                    "metric": "Contextual Precision",
+                    "score": 0.25,
+                    "threshold": 0.7,
+                    "status": "FAIL",
+                    "reason": "The score is 0.25 because only one out of five retrieval contexts is relevant to the input. The single relevant node, ranked fourth, explicitly states \"our whole eval strategy is that we are building an eval suite on three levels,\" which directly addresses the question. However, the three irrelevant nodes ranked above it (first, second, and third) discuss tangential topics like \"why do we need evals\" and \"offline eval\" without defining an eval suite, and the fifth node also only discusses \"a",
+                    "error": null
+                }
+            ]
+        },
+        {
+            "case_number": 15,
+            "input": "Which metrics are used to evaluate the retriever?",
+            "expected_output": "The retriever is evaluated using recall and precision. Recall measures how many of the relevant documents the retriever managed to fetch, and precision measures how many of the fetched documents were actually relevant.",
+            "retrieval_context": [
+                "evaluate this retriever independently, just the retriever we are not focusing on the entire application right now our entire focus is that the retriever we have built is it working properly or not and the retriever is working properly it means that given a question is my retriever able to fetch the right documents from the vector database or not so here we will use two metrics for evaluation one will be recall which tells how many of the right documents I was able to bring and the second is precision which means how many of the documents I brought were of use so we will evaluate our retriever on both of them and once this evaluation is done and we are satisfied that our retriever is working properly then we will move to step three and in",
+                "this flow so obviously first of all our work is to define a task and target our task is that our retriever should work properly and our target is a single component which is retriever next we have to define a success criteria that how will we know that our retriever is working properly so guys already seen on screen but someone can tell that how can we quantify that a retriever is working properly working properly with a retriever so I told you how do we quantify it let me tell you the answer is this metric written here recall at K here a definition is written let's read it out of all the correct items that exist how many did the system retrieve in its top K results can you understand this line see suppose this is the question what are the",
+                "a set of metrics. Based on which we perform evaluation. But this is not correct. Here in the first lecture I would like to tell you one thing. That the meaning of evaluation, LLM eval is not just metric. It is basically the complete testing setup. The complete setup that we create to test LLMs. We call that complete testing setup LLM evals. Okay. So what are we evaluating? Suppose you have a rag chatbot. We want to evaluate the retriever in it. So the retriever component has become a part of our LLM eval. Based on which criteria are we evaluating it? Based on the accuracy of the retriever. We are evaluating it based on that. The data set that we have prepared to evaluate comes in LLM eval. When are we running these tests? Are we running it",
+                "and we are satisfied that our retriever is working properly then we will move to step three and in step three we will start building our generator so now we will write the generator code generator is basically an LLM in which you give a question and relevant context and that generator gives you an answer in return so we will build this in isolation and after building this we will evaluate this in step four and in evaluating this you will learn two or three metrics one will be faithfulness which basically tells whether the answer is generated in the given context or the model hallucinated by itself so we will check this second we will check that your answer generated is relevant with the question and third we will judge citation accuracy so",
+                "teach you to test the retriever then I will make a generator and then I will teach you to test the generator and in the same process you will do deep eval for the first time after that in the next session we will build a rag pipeline and we will run this rag triad three metrics after that third session or maybe it can be a little early I don't really know because I don't know how it will turn out in the future we will run the entire evaluation at the application level and fourth, the final session we will cover regression testing and online eval we will cover this so basically in the next four sessions the whole framework that we have made of testing a rag application we will practically carry out this is our road map of the four sessions"
+            ],
+            "success": true,
+            "metrics": [
+                {
+                    "metric": "Contextual Recall",
+                    "score": 1.0,
+                    "threshold": 0.7,
+                    "status": "PASS",
+                    "reason": "The score is 1.00 because all sentences in the expected output are fully supported by node 1 in retrieval context, which explicitly defines both recall and precision metrics. Great job achieving perfect contextual recall!",
+                    "error": null
+                },
+                {
+                    "metric": "Contextual Precision",
+                    "score": 1.0,
+                    "threshold": 0.7,
+                    "status": "PASS",
+                    "reason": "The score is 1.00 because the top two retrieval contexts are both directly relevant, explicitly stating that \"we will use two metrics for evaluation one will be recall... and the second is precision\" and defining \"recall at K... out of all the correct items that exist how many did the system retrieve in its top K results.\" The remaining nodes are irrelevant, as they discuss general LLM evaluation, generator metrics like \"faithfulness,\" or session roadmaps without specifying the retriever's \"",
+                    "error": null
+                }
+            ]
+        }
+    ],
+    "metric_summary": {
+        "Contextual Recall": {
+            "average_score": 0.8867,
+            "pass_rate_percent": 86.67,
+            "passed": 13,
+            "failed": 2,
+            "api_errors": 0,
+            "total_with_scores": 15
+        },
+        "Contextual Precision": {
+            "average_score": 0.7885,
+            "pass_rate_percent": 80.0,
+            "passed": 12,
+            "failed": 3,
+            "api_errors": 0,
+            "total_with_scores": 15
+        }
+    },
+    "overall_summary": {
+        "passed": 11,
+        "failed": 4,
+        "api_errors": 0,
+        "total_test_cases": 15,
+        "pass_rate_percent": 73.33
+    },
+    "completed_test_cases": 15,
+    "report_updated_at": "2026-10-31T02:35:13.869091+00:00"
+}
